@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "pda6100_scan_ver0.0"
