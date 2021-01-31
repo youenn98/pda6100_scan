@@ -25,11 +25,30 @@ public class MainActivity extends TabActivity {
     public static final String WORK_TAG = "工作";
     private TabHost myTabHost;
 
+    private int MESSAGE_SUCCESS = 0;
+    private int MESSAGE_FAIL = 1;
+    private String devport = "/dev/ttyMT1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         myTabHost = getTabHost();
+        Intent intent0 = new Intent(this, Setting.class);
+        Intent intent1 = new Intent(this, ScanGroup.class);
+        TabHost.TabSpec tabSpec0 = myTabHost.newTabSpec(SET_TAG)
+                .setIndicator(SET_TAG).setContent(intent0);
+        TabHost.TabSpec tabSpec1 = myTabHost.newTabSpec(WORK_TAG)
+                .setIndicator(WORK_TAG).setContent(intent1);
+
+        myTabHost.addTab(tabSpec0);
+        myTabHost.addTab(tabSpec1);
+        myTabHost.setCurrentTab(1);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 }
