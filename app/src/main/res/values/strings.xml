@@ -254,14 +254,23 @@
         <string name="tid_query">TID巡查</string>
 
         <string name="storage">存储区:</string>
-        <string name="starting_address">起始地址(Word):</string>
-        <string name="len">长度(Word):</string>
-        <string name="access_password">访问密码(Hex):</string>
+        <string name="goods_name">存货全名</string>
+        <string name="ware_house_name">仓库全名</string>
+        <string name="specification">规格</string>
+        <string name="type">型号</string>
+        <string name="unit">单位</string>
+        <string name="lot">批号</string>
+        <string name="price">单价</string>
+        <string name="whole_price">全额</string>
+        <string name="tax_rate">税率</string>
+        <string name="tax_in_price">含税单价</string>
+        <string name="tax">税务</string>
         <string name="read_write_data">读写数据(Hex):</string>
-        <string name="read">读数据</string>
         <string name="write">写数据</string>
+        <string name="read">读数据</string>
         <string name="write_epc">写EPC</string>
-
+        <string name="write_sell">写入销售单</string>
+        <string name="write_buy">写入采购单</string>
         <string name="set">设置</string>
         <string name="get">获取</string>
         <string name="buzzer">蜂鸣器</string>

@@ -36,7 +36,7 @@
 
                     <TextView
                         android:id="@+id/id_text"
-                        android:layout_width="85sp"
+                        android:layout_width="50sp"
                         android:layout_height="30dp"
                         android:gravity="center_vertical|center_horizontal"
                         android:padding="2sp"
@@ -53,12 +53,12 @@
 
                     <TextView
                         android:id="@+id/epc_text"
-                        android:layout_width="300dp"
+                        android:layout_width="280dp"
                         android:layout_height="30dp"
                         android:gravity="center"
                         android:padding="2sp"
                         android:singleLine="true"
-                        android:text= "@string/item_name"
+                        android:text="TAG"
                         android:textColor="#ff333333"
                         android:textSize="10sp"
                         android:textStyle="bold" />
@@ -68,13 +68,34 @@
                         android:layout_height="match_parent"
                         android:background="#BBBBBB" />
 
+                    <TextView
+                        android:id="@+id/times_text"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:padding="2sp"
+                        android:singleLine="true"
+                        android:text="@string/count"
+                        android:textColor="#ff333333"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="5dp"
                         android:layout_height="match_parent"
                         android:background="#BBBBBB" />
 
-
+                    <TextView
+                        android:id="@+id/rssi_text"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:padding="2sp"
+                        android:singleLine="true"
+                        android:text="RSSI"
+                        android:textColor="#ff333333"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
 
                     <View
                         android:layout_width="5dp"

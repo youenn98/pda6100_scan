@@ -11,14 +11,12 @@ public class ScanGroup extends ActivityGroup {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         group = this;
     }
 
     @Override
     public void onBackPressed() {
-        // TODO Auto-generated method stub
         group.getLocalActivityManager().getCurrentActivity().onBackPressed();
     }
 
@@ -29,6 +27,7 @@ public class ScanGroup extends ActivityGroup {
         Window w = group.getLocalActivityManager().startActivity(
                 "FirstActivity", intent);
         View view = w.getDecorView();
+        intent.putExtra(MainActivity.EXTRA_MODE, getIntent().getStringExtra(MainActivity.EXTRA_MODE));
         group.setContentView(view);
     }
 }

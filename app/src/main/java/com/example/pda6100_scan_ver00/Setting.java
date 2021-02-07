@@ -103,6 +103,7 @@ public class Setting extends Activity implements View.OnClickListener {
     }
 
     private void initView() {
+        //设置版本
         tvSoftVersion = (TextView) findViewById(R.id.soft_version);
         PackageManager packageManager = this.getApplicationContext().getPackageManager();
         try {
@@ -114,6 +115,7 @@ public class Setting extends Activity implements View.OnClickListener {
         }
         tvVersion = (TextView) findViewById(R.id.version);
 
+        //设置功率
         tvpowerdBm = (Spinner) findViewById(R.id.power_spinner);
         ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(
                 this, R.array.Power_select,
@@ -122,6 +124,7 @@ public class Setting extends Activity implements View.OnClickListener {
         tvpowerdBm.setAdapter(adapter3);
         tvpowerdBm.setSelection(30, true);
 
+        //设置蜂鸣器
         tvBeep = (Spinner) findViewById(R.id.beep_spinner);
         ArrayAdapter<CharSequence> adapter4 = ArrayAdapter
                 .createFromResource(this, R.array.beep_select,
@@ -130,9 +133,11 @@ public class Setting extends Activity implements View.OnClickListener {
         tvBeep.setAdapter(adapter4);
         tvBeep.setSelection(0, true);
 
+        //关于频段的设定
         bSetting = (Button) findViewById(R.id.pro_setting);
         bRead = (Button) findViewById(R.id.pro_read);
 
+        //有5个频段可供选择
         bSetting.setOnClickListener(this);
         bRead.setOnClickListener(this);
         strBand[0] = "Chinese band2";
@@ -149,6 +154,7 @@ public class Setting extends Activity implements View.OnClickListener {
         spBand.setAdapter(spada_Band);
         spBand.setSelection(1, false);
 //        SetFre(2);
+        //设置频率
         spBand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -179,6 +185,7 @@ public class Setting extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        //设置数据
         if (view == bSetting) {
             int MaxFre = 0;
             int MinFre = 0;
@@ -212,12 +219,12 @@ public class Setting extends Activity implements View.OnClickListener {
                 Toast.makeText(getApplicationContext(), getString(R.string.set_fail),
                         Toast.LENGTH_SHORT).show();
             }
-        } else if (view == bRead) {
+        } else if (view == bRead) {                                                //获得数据
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     int i = UHfData.UHfGetData.GetUhfInfo();
-                    Log.i("Huang, ScanView", "GetUhfInfo: " + i);
+                    Log.i("Get setting", "GetUhfInfo: " + i);
                     mHandler.removeMessages(MSG_SHOW_PROPERTIES);
                     mHandler.sendEmptyMessage(UPDATE_SPINNER_BAND);
                     try {

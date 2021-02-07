@@ -8,10 +8,14 @@ import android.os.SystemClock;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Utils {
+    private static final int max_len = 1024;
     public static boolean showWarning(Context context, int resRes) {
         Toast.makeText(context, resRes, Toast.LENGTH_LONG).show();
         return false;
@@ -43,8 +47,6 @@ public class Utils {
         }
         return false;
     }
-
-
 
 
     public static SoundPool sp ;
