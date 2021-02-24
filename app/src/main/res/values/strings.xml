@@ -255,10 +255,16 @@
 
         <string name="storage">存储区:</string>
         <string name="goods_name">存货全名</string>
+        <string name="goods_code">存货编号</string>
         <string name="ware_house_name">仓库全名</string>
         <string name="specification">规格</string>
         <string name="type">型号</string>
         <string name="unit">单位</string>
+        <string name="aux_unit">辅助单位</string>
+        <string name="aux_unit1">辅助单位1</string>
+        <string name="quan">数量</string>
+        <string name="aux_quan">辅助数量</string>
+        <string name="aux_quan1">辅助数量1</string>
         <string name="lot">批号</string>
         <string name="price">单价</string>
         <string name="whole_price">全额</string>

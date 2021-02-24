@@ -35,7 +35,7 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
 
     private int mode;
     private String passwd = "00000000";
-    private  int max_len = 32;
+    private  int max_word = 2;
 
     Spinner mSpinnerEpcs;
     int selectedEd = 3;
@@ -43,10 +43,16 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
 
     Spinner c_mem;
     EditText c_good;
+    EditText c_good_code;
     EditText c_len;
     EditText c_ware;
     EditText c_specification;
     EditText c_unit;
+    EditText c_aux_unit;
+    EditText c_aux_unit1;
+    EditText c_quan;
+    EditText c_aux_quan;
+    EditText c_aux_quan1;
     EditText c_lot;
     EditText c_whole_price;
     EditText c_price;
@@ -152,12 +158,24 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
 
         c_good = (EditText) findViewById(R.id.et_good);
         c_good.setText("\n");
+        c_good_code = (EditText) findViewById(R.id.et_good_code);
+        c_good.setText("\n");
         c_ware = (EditText) findViewById(R.id.et_ware);
         c_ware.setText("\n");
         c_specification = (EditText) findViewById(R.id.et_specification);
         c_specification.setText("\n");
         c_unit = (EditText) findViewById(R.id.et_unit);
         c_unit.setText("\n");
+        c_aux_unit = (EditText) findViewById(R.id.et_aux_unit);
+        c_aux_unit.setText("\n");
+        c_aux_unit1 = (EditText) findViewById(R.id.et_aux_unit1);
+        c_aux_unit.setText("\n");
+        c_quan = (EditText) findViewById(R.id.et_quan);
+        c_quan.setText("\n");
+        c_aux_quan = (EditText) findViewById(R.id.et_aux_quan);
+        c_aux_quan.setText("\n");
+        c_aux_quan1 = (EditText) findViewById(R.id.et_aux_quan1);
+        c_aux_quan1.setText("\n");
         c_lot = (EditText) findViewById(R.id.et_lot);
         c_lot.setText("\n");
         c_price = (EditText) findViewById(R.id.et_price);
@@ -168,6 +186,8 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
         c_tax_rate.setText("\n");
         c_tax = (EditText)findViewById(R.id.et_tax);
         c_tax.setText("\n");
+
+
 
         buyButton = (Button) findViewById(R.id.button_write_buy);
         sellButton = (Button) findViewById(R.id.button_write_sell_6c);
@@ -193,31 +213,61 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
     @Override
     public void onClick(View view) {
         if (view == wButton) {
-          /*  Log.i("zhouxin", "----onclick---- wButton");
-            if (!checkContent(CHECK_W_6C))
+            int result = -1;
+            int index = 0;
+            try{
+                //c_good
+                result = set_data(index,c_good);index += max_word;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_good_code);index += max_word;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_ware);index += max_word;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_specification);index += max_word;
+                if(result != 0) {showToast("写数据失败");return;}
+                /*
+                result = set_data(index,c_unit);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_aux_unit);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_aux_unit1);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_quan);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_aux_quan);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_aux_quan1);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_lot);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_price);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_whole_price);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_tax_rate);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+
+                result = set_data(index,c_tax);index += max_len;
+                if(result != 0) {showToast("写数据失败");return;}
+                */
+            } catch (Exception e) {
+                e.printStackTrace();
+                showToast("写数据失败");
                 return;
-            try {
-                int wordPtr = Integer.valueOf(c_wordPtr.getText().toString());
-                byte[] word = Tools.intToByte(wordPtr);
-                int result = -1;
-
-                result = UHfData.UHfGetData.Write6c((byte) (int) Integer.valueOf(c_len.getText().toString()),
-                        (byte) (mSelectedEpc.length() / 4),
-                        UHfData.UHfGetData.hexStringToBytes(mSelectedEpc), (byte) selectedEd, word,
-                        UHfData.UHfGetData.hexStringToBytes(content.getText().toString()),
-                        UHfData.UHfGetData.hexStringToBytes(c_pwd.getText().toString()));
-
-                if (result != 0) {
-//					Toast.makeText(getApplicationContext(), getString(R.string.write_fail), Toast.LENGTH_SHORT).show();
-                    showToast(getString(R.string.write_fail));
-                } else {
-                    content.setText("");
-//					Toast.makeText(getApplicationContext(), getString(R.string.write_success), Toast.LENGTH_SHORT)
-//							.show();
-                    showToast(getString(R.string.write_success));
-                }
-            } catch (Exception ex) {
-            }*/
+            }
+            showToast("写数据成功");
         } else if (view == sellButton) {
            /* Log.i("zhouxin", "----onclick---- rButton");
             if (!checkContent(CHECK_R_6C))
@@ -273,11 +323,83 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
             int index = 0;
             String temp;
             try{
-                result = get_data(32);index += max_len;
+                //c_good
+                result = get_data(index);index += max_word;
                 if(result != 0) {showToast("读数据失败");return;}
                 temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
                 c_good.setText(temp);
 
+                result = get_data(index);index += max_word;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_good_code.setText(temp);
+
+                result = get_data(index);index += max_word;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_ware.setText(temp);
+
+                result = get_data(index);index += max_word;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_specification.setText(temp);
+                /*
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_unit.setText(temp);
+
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_aux_unit.setText(temp);
+
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_aux_unit1.setText(temp);
+
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_quan.setText(temp);
+                */
+                /*
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_aux_quan.setText(temp);
+
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_aux_quan1.setText(temp);
+
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_lot.setText(temp);
+
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_price.setText(temp);
+
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_whole_price.setText(temp);
+
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_tax_rate.setText(temp);
+
+                result = get_data(index);index += max_len;
+                if(result != 0) {showToast("读数据失败");return;}
+                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
+                c_tax.setText(temp);
+                */
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -324,29 +446,48 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
         byte[] word = Tools.intToByte(index);
         return UHfData.UHfGetData.Read6C((byte) ((mSelectedEpc.length()) / 4),
                 UHfData.UHfGetData.hexStringToBytes(mSelectedEpc), (byte) selectedEd, word,
-                (byte) (max_len/4),
+                (byte) max_word,
                 UHfData.UHfGetData.hexStringToBytes(passwd));
     }
 
-
-
-    public boolean convertS_to_B(String str,byte[] bt) throws UnsupportedEncodingException {
-        byte[]  byteArray = str.getBytes(StandardCharsets.UTF_8);
-        if(byteArray.length > max_len) return false;
-        for(int i = 0; i < byteArray.length;i++){
-            bt[i] = byteArray[i];
-        }
-        return true;
+    private int set_data(int index,EditText w_content) throws UnsupportedEncodingException {
+        byte[] word = Tools.intToByte(index);
+        int result;
+        result = UHfData.UHfGetData.Write6c((byte) max_word,
+                (byte) (mSelectedEpc.length() / 4),
+                UHfData.UHfGetData.hexStringToBytes(mSelectedEpc), (byte) selectedEd, word,
+                convertS_to_B(w_content.getText().toString()),
+                UHfData.UHfGetData.hexStringToBytes(passwd));
+        return result;
     }
-    public String convertB_to_S(byte[] bt) throws UnsupportedEncodingException {
-        final Charset UTF8_CHARSET = Charset.forName("UTF-8");
-        String str = new String(bt, UTF8_CHARSET);
-        for(int i = 0;i < str.length();i++){
-            if(str.charAt(i) == '\n'){
-                return str.substring(0,i);
+
+
+    public byte[] convertS_to_B(String str) throws UnsupportedEncodingException {
+        byte[]  byteArray = str.getBytes(StandardCharsets.US_ASCII);
+        byte ret[] = new byte[max_word*2];
+
+        for(int i = 0;i < max_word * 2;i++){
+            if(i < byteArray.length){
+                ret[i] = byteArray[i];
+            }else{
+                ret[i] = '\0';
             }
         }
-        return new String("");
+        return ret;
+    }
+    public String convertB_to_S(byte[] bt) throws UnsupportedEncodingException {
+        String str = new String(bt, StandardCharsets.US_ASCII);
+        if(str.length() == 0) return "no data";
+        int end_index = -1;
+        for(int i = 0;i < max_word * 2;i++){
+            if(str.charAt(i) == '\0'){
+                end_index = i;
+                break;
+            }
+        }
+        if(end_index == 0) return "nodt";
+        else if(end_index == -1) return str.substring(0,max_word*2);
+        else return str.substring(0,end_index);
     }
 
 }
