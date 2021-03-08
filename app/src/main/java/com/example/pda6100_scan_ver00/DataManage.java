@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ActivityGroup;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +23,29 @@ import com.uhf.scanlable.UHfData;
 
 import com.example.pda6100_scan_ver00.Utils;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.pda.serialport.Tools;
+
+import static android.os.Environment.DIRECTORY_DOCUMENTS;
 
 public class DataManage extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private final String TAG = DataManage.class.getSimpleName();
@@ -36,6 +53,9 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
     private int mode;
     private String passwd = "00000000";
     private  int max_word = 2;
+    private  int sell_excel = 0;
+    private  int buy_excel = 1;
+
 
     Spinner mSpinnerEpcs;
     int selectedEd = 3;
@@ -269,54 +289,47 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
             }
             showToast("写数据成功");
         } else if (view == sellButton) {
-           /* Log.i("zhouxin", "----onclick---- rButton");
-            if (!checkContent(CHECK_R_6C))
-                return;
-            try {
-                int wordPtr = Integer.valueOf(c_wordPtr.getText().toString());
-                byte[] word = Tools.intToByte(wordPtr);
-                int result = -1;
-                if (mCheckBoxBroad.isChecked()) {
-                    result = UHfData.UHfGetData.Read6C((byte) 0,
-                            new byte[]{}, (byte) selectedEd, word,
-                            Byte.valueOf(c_len.getText().toString()),
-                            UHfData.UHfGetData.hexStringToBytes(c_pwd.getText().toString()));
-                } else {
-                    result = UHfData.UHfGetData.Read6C((byte) ((mSelectedEpc.length()) / 4),
-                            UHfData.UHfGetData.hexStringToBytes(mSelectedEpc), (byte) selectedEd, word,
-                            Byte.valueOf(c_len.getText().toString()),
-                            UHfData.UHfGetData.hexStringToBytes(c_pwd.getText().toString()));
+            Date date = new Date(); // 今日の日付
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String strFile = dateFormat.format(date).concat("sell.xls");
+
+            File root = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOCUMENTS), "Sell_Excel");
+            if(!root.exists()){
+                root.mkdirs();
+            }
+
+            File file = new File(root,strFile);
+            if(!file.exists()){
+                try {
+                    file.createNewFile();
+                    init_excel(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                String temp = UHfData.UHfGetData
-                        .bytesToHexString(UHfData.UHfGetData.getRead6Cdata(), 0, Byte.valueOf(c_len.getText().toString()) * 2)
-                        .toUpperCase();
-                if (result != 0) {
-                    content.setText("");
-                    LogUtils.e(TAG, "onClick, read Fail >>>>>> ");
-                    showToast(getString(R.string.read_fail));
-                } else {
-                    content.setText(temp.toUpperCase());
-                    showToast(getString(R.string.read_success));
-                    Utils.play(1, 0);
-                }
-            } catch (Exception ex) {
-            }*/
+            }
+
+            try{
+                // 获取excel文件流
+                InputStream is = new FileInputStream(file);
+                write_excel(is,file.getAbsolutePath());
+
+            }catch (FileNotFoundException e){
+                e.printStackTrace();
+
+            }catch (Exception ex) {
+                ex.printStackTrace();
+            }
         } else if (view == buyButton) {
-           /* if (!checkContent(CHECK_W_6C))
-                return;
             try {
-                int result = UHfData.UHfGetData.WriteEPC((byte) ((mSelectedEpc.length()) / 4),
-                        UHfData.UHfGetData.hexStringToBytes(c_pwd.getText().toString()),
-                        UHfData.UHfGetData.hexStringToBytes(mSelectedEpc),
-                        UHfData.UHfGetData.hexStringToBytes(content.getText().toString()));
-                if (result != 0) {
-                    showToast(getString(R.string.write_epc_fail));
-                }
-                else {
-                    showToast(getString(R.string.write_epc_success));
-                }
+                Date date = new Date(); // 今日の日付
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String strFile = dateFormat.format(date).concat(".xls");
+
+
+
             } catch (Exception ex) {
-            }*/
+                ex.printStackTrace();
+            }
         }else if(view == rButton){
             Log.i("yao", "----onclick---- rButton");
             int result = -1;
@@ -406,6 +419,64 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
             showToast("读数据成功");
 
         }
+    }
+
+    private void write_excel(InputStream is,String filepath) throws IOException {
+        int index = 0;
+        // 获取workbook对象
+        HSSFWorkbook workbook = new HSSFWorkbook(is);
+        // 获取sheet对象
+        Sheet sheet = workbook.getSheetAt(0);
+        // 获取row对象
+        Row row = sheet.getRow(0);
+        // 获取cell对象
+        Cell cell_cnt = row.getCell(16);
+        int start_row = Integer.valueOf(cell_cnt.getStringCellValue());
+        row = sheet.getRow(start_row);
+        //设置行号
+        Cell cell_it = row.getCell(index++);
+        cell_it.setCellValue(start_row);
+        //good
+        cell_it = row.getCell(index++);
+        cell_it.setCellValue(c_good.getText().toString());
+        //good code
+        cell_it = row.getCell(index++);
+        cell_it.setCellValue(c_good_code.getText().toString());
+        //len
+        cell_it = row.getCell(index++);
+        cell_it.setCellValue(c_len.getText().toString());
+        //ware
+        cell_it = row.getCell(index++);
+        cell_it.setCellValue(c_ware.getText().toString());
+        //Rest can be added same.
+
+        //close the input stream
+        is.close();
+        OutputStream outputStream = new FileOutputStream(filepath);
+        workbook.write(outputStream);
+        outputStream.flush();
+        outputStream.close();
+    }
+
+    private void init_excel(File file) throws IOException {
+        int index = 0;
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        Sheet sheet = workbook.getSheetAt(0);
+        Row row = sheet.getRow(0);;
+        Cell cell = row.getCell(index++);
+        cell.setCellValue("LINE NO.");
+        cell = row.getCell(index++);
+        cell.setCellValue("STOCK NO.");
+        cell = row.getCell(index++);
+        cell.setCellValue("FULL NAME OF STOCK.");
+        cell = row.getCell(index++);
+        cell.setCellValue("WAREHOUSE");
+        cell = row.getCell(16);
+        cell.setCellValue("1");
+        OutputStream outputStream = new FileOutputStream(file);
+        workbook.write(outputStream);
+        outputStream.flush();
+        outputStream.close();
     }
 
     private Toast mToast;
