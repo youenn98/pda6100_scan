@@ -323,9 +323,31 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
             try {
                 Date date = new Date(); // 今日の日付
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String strFile = dateFormat.format(date).concat(".xls");
+                String strFile = dateFormat.format(date).concat("buy.xls");
+                File root = new File(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOCUMENTS), "Sell_Excel");
+                if(!root.exists()){
+                    root.mkdirs();
+                }
 
+                File file = new File(root,strFile);
+                if(!file.exists()){
+                    try {
+                        file.createNewFile();
+                        init_excel(file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
+                try{
+                    // 获取excel文件流
+                    InputStream is = new FileInputStream(file);
+                    write_excel(is,file.getAbsolutePath());
+
+                }catch (FileNotFoundException e){
+                    e.printStackTrace();
+
+                }
 
             } catch (Exception ex) {
                 ex.printStackTrace();
