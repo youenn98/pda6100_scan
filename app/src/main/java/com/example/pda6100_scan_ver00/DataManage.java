@@ -64,20 +64,12 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
     Spinner c_mem;
     EditText c_good;
     EditText c_good_code;
-    EditText c_len;
     EditText c_ware;
-    EditText c_specification;
     EditText c_unit;
-    EditText c_aux_unit;
-    EditText c_aux_unit1;
     EditText c_quan;
-    EditText c_aux_quan;
-    EditText c_aux_quan1;
     EditText c_lot;
-    EditText c_whole_price;
     EditText c_price;
     EditText c_tax_rate;
-    EditText c_tax;
 
     EditText content;
     Button buyButton;
@@ -182,30 +174,18 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
         c_good.setText("\n");
         c_ware = (EditText) findViewById(R.id.et_ware);
         c_ware.setText("\n");
-        c_specification = (EditText) findViewById(R.id.et_specification);
-        c_specification.setText("\n");
+
         c_unit = (EditText) findViewById(R.id.et_unit);
         c_unit.setText("\n");
-        c_aux_unit = (EditText) findViewById(R.id.et_aux_unit);
-        c_aux_unit.setText("\n");
-        c_aux_unit1 = (EditText) findViewById(R.id.et_aux_unit1);
-        c_aux_unit.setText("\n");
         c_quan = (EditText) findViewById(R.id.et_quan);
         c_quan.setText("\n");
-        c_aux_quan = (EditText) findViewById(R.id.et_aux_quan);
-        c_aux_quan.setText("\n");
-        c_aux_quan1 = (EditText) findViewById(R.id.et_aux_quan1);
-        c_aux_quan1.setText("\n");
         c_lot = (EditText) findViewById(R.id.et_lot);
         c_lot.setText("\n");
         c_price = (EditText) findViewById(R.id.et_price);
         c_price.setText("\n");
-        c_whole_price = (EditText)findViewById(R.id.et_whole_price);
-        c_whole_price.setText("\n");
         c_tax_rate = (EditText)findViewById(R.id.et_tax_rate);
         c_tax_rate.setText("\n");
-        c_tax = (EditText)findViewById(R.id.et_tax);
-        c_tax.setText("\n");
+
 
 
 
@@ -246,42 +226,19 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
                 result = set_data(index,c_ware);index += max_word;
                 if(result != 0) {showToast("写数据失败");return;}
 
-                result = set_data(index,c_specification);index += max_word;
-                if(result != 0) {showToast("写数据失败");return;}
-                /*
-                result = set_data(index,c_unit);index += max_len;
+                result = set_data(index,c_quan);index += max_word;
                 if(result != 0) {showToast("写数据失败");return;}
 
-                result = set_data(index,c_aux_unit);index += max_len;
+                result = set_data(index,c_lot);index += max_word;
                 if(result != 0) {showToast("写数据失败");return;}
 
-                result = set_data(index,c_aux_unit1);index += max_len;
+                result = set_data(index,c_price);index += max_word;
                 if(result != 0) {showToast("写数据失败");return;}
 
-                result = set_data(index,c_quan);index += max_len;
+                result = set_data(index,c_tax_rate);index += max_word;
                 if(result != 0) {showToast("写数据失败");return;}
 
-                result = set_data(index,c_aux_quan);index += max_len;
-                if(result != 0) {showToast("写数据失败");return;}
 
-                result = set_data(index,c_aux_quan1);index += max_len;
-                if(result != 0) {showToast("写数据失败");return;}
-
-                result = set_data(index,c_lot);index += max_len;
-                if(result != 0) {showToast("写数据失败");return;}
-
-                result = set_data(index,c_price);index += max_len;
-                if(result != 0) {showToast("写数据失败");return;}
-
-                result = set_data(index,c_whole_price);index += max_len;
-                if(result != 0) {showToast("写数据失败");return;}
-
-                result = set_data(index,c_tax_rate);index += max_len;
-                if(result != 0) {showToast("写数据失败");return;}
-
-                result = set_data(index,c_tax);index += max_len;
-                if(result != 0) {showToast("写数据失败");return;}
-                */
             } catch (Exception e) {
                 e.printStackTrace();
                 showToast("写数据失败");
@@ -374,67 +331,34 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
                 temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
                 c_ware.setText(temp);
 
+
                 result = get_data(index);index += max_word;
-                if(result != 0) {showToast("读数据失败");return;}
-                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
-                c_specification.setText(temp);
-                /*
-                result = get_data(index);index += max_len;
                 if(result != 0) {showToast("读数据失败");return;}
                 temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
                 c_unit.setText(temp);
 
-                result = get_data(index);index += max_len;
-                if(result != 0) {showToast("读数据失败");return;}
-                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
-                c_aux_unit.setText(temp);
 
-                result = get_data(index);index += max_len;
-                if(result != 0) {showToast("读数据失败");return;}
-                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
-                c_aux_unit1.setText(temp);
-
-                result = get_data(index);index += max_len;
+                result = get_data(index);index += max_word;
                 if(result != 0) {showToast("读数据失败");return;}
                 temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
                 c_quan.setText(temp);
-                */
-                /*
-                result = get_data(index);index += max_len;
-                if(result != 0) {showToast("读数据失败");return;}
-                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
-                c_aux_quan.setText(temp);
 
-                result = get_data(index);index += max_len;
-                if(result != 0) {showToast("读数据失败");return;}
-                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
-                c_aux_quan1.setText(temp);
-
-                result = get_data(index);index += max_len;
+                result = get_data(index);index += max_word;
                 if(result != 0) {showToast("读数据失败");return;}
                 temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
                 c_lot.setText(temp);
 
-                result = get_data(index);index += max_len;
+                result = get_data(index);index += max_word;
                 if(result != 0) {showToast("读数据失败");return;}
                 temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
                 c_price.setText(temp);
 
-                result = get_data(index);index += max_len;
-                if(result != 0) {showToast("读数据失败");return;}
-                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
-                c_whole_price.setText(temp);
-
-                result = get_data(index);index += max_len;
+                result = get_data(index);index += max_word;
                 if(result != 0) {showToast("读数据失败");return;}
                 temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
                 c_tax_rate.setText(temp);
 
-                result = get_data(index);index += max_len;
-                if(result != 0) {showToast("读数据失败");return;}
-                temp = convertB_to_S(UHfData.UHfGetData.getRead6Cdata());
-                c_tax.setText(temp);
-                */
+
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
@@ -464,14 +388,25 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
         //good code
         cell_it = row.getCell(index++);
         cell_it.setCellValue(c_good_code.getText().toString());
-        //len
-        cell_it = row.getCell(index++);
-        cell_it.setCellValue(c_len.getText().toString());
         //ware
         cell_it = row.getCell(index++);
         cell_it.setCellValue(c_ware.getText().toString());
         //Rest can be added same.
-
+        //unit
+        cell_it = row.getCell(index++);
+        cell_it.setCellValue(c_unit.getText().toString());
+        //lot
+        cell_it = row.getCell(index++);
+        cell_it.setCellValue(c_lot.getText().toString());
+        //quantity
+        cell_it = row.getCell(index++);
+        cell_it.setCellValue(c_quan.getText().toString());
+        //price
+        cell_it = row.getCell(index++);
+        cell_it.setCellValue(c_price.getText().toString());
+        //price
+        cell_it = row.getCell(index++);
+        cell_it.setCellValue(c_tax_rate.getText().toString());
         //close the input stream
         is.close();
         OutputStream outputStream = new FileOutputStream(filepath);
@@ -493,6 +428,17 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
         cell.setCellValue("FULL NAME OF STOCK.");
         cell = row.getCell(index++);
         cell.setCellValue("WAREHOUSE");
+        cell = row.getCell(index++);
+        cell.setCellValue("UNIT");
+        cell = row.getCell(index++);
+        cell.setCellValue("LOT");
+        cell = row.getCell(index++);
+        cell.setCellValue("QUANTITY");
+        cell = row.getCell(index++);
+        cell.setCellValue("UNITPRICE");
+        cell = row.getCell(index++);
+        cell.setCellValue("TAXRATE");
+
         cell = row.getCell(16);
         cell.setCellValue("1");
         OutputStream outputStream = new FileOutputStream(file);
@@ -525,14 +471,6 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
 
     @Override
     public void onNothingSelected(AdapterView<?> arg0) {
-    }
-
-    private boolean checkContent(int check) {
-        if (Utils.isEtEmpty(c_len))
-            return Utils.showWarning(this, R.string.length_empty_warning);
-
-        Log.i("Huang, ReadWrit", "check end");
-        return true;
     }
 
     private  int get_data(int index){
