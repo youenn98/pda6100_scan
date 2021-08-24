@@ -126,27 +126,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="@string/specification" />
-
-            <EditText
-                android:id="@+id/et_specification"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/rm_6c_et_height"
-                android:layout_weight="5"
-                android:gravity="center" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="2"
-                android:gravity="center"
                 android:text="@string/unit" />
 
             <EditText
@@ -167,92 +146,12 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="@string/aux_unit" />
-
-            <EditText
-                android:id="@+id/et_aux_unit"
-                android:layout_width="0dp"
-                android:layout_height="34dp"
-                android:layout_weight="5"
-                android:gravity="center" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/aux_unit1" />
-
-            <EditText
-                android:id="@+id/et_aux_unit1"
-                android:layout_width="0dp"
-                android:layout_height="34dp"
-                android:layout_weight="5"
-                android:gravity="center" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="2"
-                android:gravity="center"
                 android:text="@string/quan" />
 
             <EditText
                 android:id="@+id/et_quan"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/rm_6c_et_height"
-                android:layout_weight="5"
-                android:gravity="center" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/aux_quan" />
-
-            <EditText
-                android:id="@+id/et_aux_quan"
-                android:layout_width="0dp"
-                android:layout_height="34dp"
-                android:layout_weight="5"
-                android:gravity="center" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/aux_quan1" />
-
-            <EditText
-                android:id="@+id/et_aux_quan1"
-                android:layout_width="0dp"
-                android:layout_height="34dp"
                 android:layout_weight="5"
                 android:gravity="center" />
         </TableRow>
@@ -297,68 +196,6 @@
                 android:layout_weight="5"
                 android:gravity="center" />
         </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/whole_price" />
-
-            <EditText
-                android:id="@+id/et_whole_price"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/rm_6c_et_height"
-                android:layout_weight="5"
-                android:gravity="center" />
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/tax_rate" />
-
-            <EditText
-                android:id="@+id/et_tax_rate"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/rm_6c_et_height"
-                android:layout_weight="5"
-                android:gravity="center" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/tax" />
-
-            <EditText
-                android:id="@+id/et_tax"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/rm_6c_et_height"
-                android:layout_weight="5"
-                android:gravity="center" />
-        </TableRow>
-
 
         android:layout_width="@dimen/list_width"
         android:layout_height="wrap_content"
