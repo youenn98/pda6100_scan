@@ -224,6 +224,9 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
                 result = set_data(index,c_ware);index += max_word;
                 if(result != 0) {showToast("写数据失败");return;}
 
+                result = set_data(index,c_unit);index += max_word;
+                if(result != 0) {showToast("写数据失败");return;}
+                
                 result = set_data(index,c_quan);index += max_word;
                 if(result != 0) {showToast("写数据失败");return;}
 
