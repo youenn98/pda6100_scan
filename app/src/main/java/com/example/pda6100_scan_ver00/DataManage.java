@@ -3,6 +3,8 @@ package com.example.pda6100_scan_ver00;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityGroup;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -56,7 +58,7 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
     private  int max_word = 2;
     private  int sell_excel = 0;
     private  int buy_excel = 1;
-
+    private  int field_num = 7;
 
     Spinner mSpinnerEpcs;
     int selectedEd = 3;
@@ -77,6 +79,8 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
     Button sellButton;
     Button wButton;
     Button rButton;
+    Button showButton;
+
     private static final int CHECK_W_6B = 0;
     private static final int CHECK_R_6B = 1;
     private static final int CHECK_W_6C = 2;
@@ -171,31 +175,36 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
 
         c_good = (EditText) findViewById(R.id.et_good);
         c_good.setText("\n");
+
         c_good_code = (EditText) findViewById(R.id.et_good_code);
-        c_good.setText("\n");
+        c_good_code.setText("\n");
+
         c_ware = (EditText) findViewById(R.id.et_ware);
         c_ware.setText("\n");
 
         c_unit = (EditText) findViewById(R.id.et_unit);
         c_unit.setText("\n");
+
         c_quan = (EditText) findViewById(R.id.et_quan);
         c_quan.setText("\n");
+
         c_lot = (EditText) findViewById(R.id.et_lot);
         c_lot.setText("\n");
+
         c_price = (EditText) findViewById(R.id.et_price);
         c_price.setText("\n");
-
-
 
         buyButton = (Button) findViewById(R.id.button_write_buy);
         sellButton = (Button) findViewById(R.id.button_write_sell_6c);
         wButton = (Button) findViewById(R.id.button_write_6c);
         rButton = (Button) findViewById(R.id.button_read_6c);
+        showButton = (Button) findViewById(R.id.button_show_all);
 
         buyButton.setOnClickListener(this);
         wButton.setOnClickListener(this);
         rButton.setOnClickListener(this);
         sellButton.setOnClickListener(this);
+        showButton.setOnClickListener(this);
     }
 
     @SuppressWarnings("deprecation")
@@ -354,7 +363,40 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
                 e.printStackTrace();
             }
             showToast("读数据成功");
+        }else if(view == showButton){
+            int result = -1;
+            int index = 0;
+            String temp;
+            String show_str = "";
+            try{
+                for(int i = 0; i < field_num;i++) {
+                    result = get_data(index);
+                    index += max_word;
+                    if (result != 0) {
+                        showToast("读数据失败");
+                        return;
+                    }
+                    temp = convertB_to_S_fill_q(UHfData.UHfGetData.getRead6Cdata());
+                    show_str.concat(temp);
+                }
+                AlertDialog.Builder normalDialog = new AlertDialog.Builder(DataManage.this);
 
+                normalDialog.setTitle("显示所有字段");
+                normalDialog.setMessage(show_str);
+                normalDialog.setNegativeButton("关闭",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;
+                            }
+                        });
+                // 显示
+                normalDialog.show();
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            showToast("读数据成功，显示数据");
         }
     }
 
@@ -519,9 +561,26 @@ public class DataManage extends Activity implements View.OnClickListener, Adapte
                 break;
             }
         }
-        if(end_index == 0) return "nodt";
-        else if(end_index == -1) return str.substring(0,max_word*2);
-        else return str.substring(0,end_index);
+        if(end_index == 0) return "no data";
+        else if(end_index == -1) return str.substring(0 ,max_word * 2);
+        else return str.substring(0 ,end_index);
+    }
+
+    public String convertB_to_S_fill_q(byte[] bt) throws UnsupportedEncodingException{
+        String str = new String(bt, StandardCharsets.US_ASCII);
+
+        if(str.length() == 0) return "no data";
+        int index = -1;
+        for(int i = 0;i < max_word * 2;i++){
+            if(str.charAt(i) == '\0'){
+                index++;
+                StringBuilder sb = new StringBuilder(str);
+                sb.replace(index,index+1,"?");
+                str = sb.toString();
+            }
+        }
+        //str.concat("\n");
+        return str;
     }
 
 }

@@ -291,4 +291,5 @@
         <string name="write_fail">写数据失败</string>
         <string name="set_success">设置成功</string>
         <string name="set_fail">设置失败</string>
+        <string name="show_all">读取并显示所有字段</string>
 </resources>
